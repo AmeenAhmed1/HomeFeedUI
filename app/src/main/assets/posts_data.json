@@ -1,0 +1,29 @@
+[
+  {
+    "itemTitle": "Chicken Chester",
+    "itemDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eros est, blandit eu nunc sit amet",
+    "itemPublishedDay": 2,
+    "itemType": 2,
+    "itemLikeCount": 129,
+    "itemCommentCount": 110,
+    "itemShareCount": 14
+  },
+  {
+    "itemTitle": "Burger",
+    "itemDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eros est, blandit eu nunc sit amet",
+    "itemPublishedDay": 6,
+    "itemType": 1,
+    "itemLikeCount": 19,
+    "itemCommentCount": 10,
+    "itemShareCount": 1
+  },
+  {
+    "itemTitle": "User Post",
+    "itemDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eros est, blandit eu nunc sit amet",
+    "itemPublishedDay": 1,
+    "itemType": 3,
+    "itemLikeCount": 90,
+    "itemCommentCount": 1,
+    "itemShareCount": 0
+  }
+]

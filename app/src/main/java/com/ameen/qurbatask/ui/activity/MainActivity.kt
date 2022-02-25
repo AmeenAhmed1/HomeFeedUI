@@ -8,11 +8,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ameen.qurbatask.data.DummyData
 import com.ameen.qurbatask.ui.screen.MainScreen
 
+private const val TAG = "MainActivity"
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(itemToDisplay = DummyData().getDummyData())
+            MainScreen(postToDisplay = DummyData().loadDataFromJson(applicationContext))
         }
     }
 }
@@ -20,5 +22,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    MainScreen(itemToDisplay = DummyData().getDummyData())
+    //MainScreen(postToDisplay = DummyData().getDummyData())
 }
