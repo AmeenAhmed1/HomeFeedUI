@@ -15,8 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ameen.qurbatask.R
 import com.ameen.qurbatask.data.DummyData
-import com.ameen.qurbatask.data.ItemModel
-import com.ameen.qurbatask.data.ItemType
+import com.ameen.qurbatask.data.PostModel
 import com.ameen.qurbatask.ui.component.ButtonTextWithIcon
 import com.ameen.qurbatask.ui.component.RoundedImage
 import com.ameen.qurbatask.ui.component.TextToView
@@ -24,7 +23,7 @@ import com.ameen.qurbatask.util.TextType
 import com.ameen.qurbatask.util.Utils
 
 @Composable
-fun ItemMain(item: ItemModel) {
+fun ItemMain(post: PostModel) {
 
     Column(Modifier.background(Color.White)) {
 
@@ -48,15 +47,17 @@ fun ItemMain(item: ItemModel) {
                     )
 
                     Column {
-                        item.itemTitle?.let { TextToView(textToShow = it, TextType.TEXT_TITLE) }
+                        post.itemTitle?.let { TextToView(textToShow = it, TextType.TEXT_TITLE) }
                         TextToView(
-                            textToShow = "${item.itemPublishedDay.toString()} days ago",
+                            textToShow = "${post.itemPublishedDay.toString()} days ago",
                             TextType.TEXT_PUBLISHED_DATE
                         )
                     }
 
                     RoundedImage(
-                        imageSource = R.drawable.ic_restourant,
+                        imageSource = if (post.itemType!! < 3)
+                            R.drawable.ic_restourant
+                        else R.drawable.ic_verified_user,
                         modifier = Modifier
                             .padding(4.dp)
                             .size(20.dp)
@@ -82,17 +83,21 @@ fun ItemMain(item: ItemModel) {
         }
 
         // Image Section
+        val image = if (post.itemType == 2)
+            R.drawable.image
+        else R.drawable.burger
+
         Image(
-            painter = painterResource(id = item.itemImage!!),
+            painter = painterResource(id = image),
             modifier = Modifier.fillMaxWidth(),
             contentScale = ContentScale.Crop,
             contentDescription = " "
         )
 
-        if (item.itemType != ItemType.USER) item.itemTitle?.let {
+        if (post.itemType!! < 3) post.itemTitle?.let {
             ContentType(
                 it,
-                typeText = Utils.getType(item.itemType!!)
+                typeText = Utils.getPlaceType(post.itemType)!!
             )
         }
 
@@ -111,15 +116,15 @@ fun ItemMain(item: ItemModel) {
         ) {
 
             ButtonTextWithIcon(
-                text = item.itemLikeCount?.toString()!!,
+                text = post.itemLikeCount?.toString()!!,
                 iconResource = R.drawable.ic_like
             )
             ButtonTextWithIcon(
-                text = item.itemCommentCount?.toString()!!,
+                text = post.itemCommentCount?.toString()!!,
                 iconResource = R.drawable.ic_comment
             )
             ButtonTextWithIcon(
-                text = item.itemShareCount?.toString()!!,
+                text = post.itemShareCount?.toString()!!,
                 iconResource = R.drawable.ic_share
             )
         }
@@ -134,5 +139,5 @@ fun ItemMain(item: ItemModel) {
 fun ContentPreview() {
     val item = DummyData().getDummyData()[0]
 
-    ItemMain(item = item)
+    ItemMain(post = item)
 }
