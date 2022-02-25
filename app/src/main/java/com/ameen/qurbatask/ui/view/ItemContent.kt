@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ameen.qurbatask.R
+import com.ameen.qurbatask.data.DummyData
 import com.ameen.qurbatask.data.ItemModel
 import com.ameen.qurbatask.data.ItemType
 import com.ameen.qurbatask.ui.component.ButtonTextWithIcon
@@ -82,7 +83,7 @@ fun ItemMain(item: ItemModel) {
 
         // Image Section
         Image(
-            painter = painterResource(id = R.drawable.image),
+            painter = painterResource(id = item.itemImage!!),
             modifier = Modifier.fillMaxWidth(),
             contentScale = ContentScale.Crop,
             contentDescription = " "
@@ -109,12 +110,21 @@ fun ItemMain(item: ItemModel) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            ButtonTextWithIcon(text = "32K", iconResource = R.drawable.ic_like)
-            ButtonTextWithIcon(text = "597", iconResource = R.drawable.ic_comment)
-            ButtonTextWithIcon(text = "12.3K", iconResource = R.drawable.ic_share)
+            ButtonTextWithIcon(
+                text = item.itemLikeCount?.toString()!!,
+                iconResource = R.drawable.ic_like
+            )
+            ButtonTextWithIcon(
+                text = item.itemCommentCount?.toString()!!,
+                iconResource = R.drawable.ic_comment
+            )
+            ButtonTextWithIcon(
+                text = item.itemShareCount?.toString()!!,
+                iconResource = R.drawable.ic_share
+            )
         }
 
-        Divider(modifier = Modifier.padding(8.dp), color = Color.Black, thickness = 0.5.dp)
+        Divider(modifier = Modifier.padding(8.dp), thickness = 0.dp)
     }
 
 }
@@ -122,11 +132,7 @@ fun ItemMain(item: ItemModel) {
 @Preview(showBackground = true)
 @Composable
 fun ContentPreview() {
-    val item = ItemModel(
-        itemTitle = "Chicken Chester",
-        itemPublishedDay = 2,
-        itemType = ItemType.CAFE_AND_RESTAURANT
-    )
+    val item = DummyData().getDummyData()[0]
 
     ItemMain(item = item)
 }
