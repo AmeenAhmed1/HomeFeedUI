@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QurbaTask</string>
+
+    <string name="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eros est, blandit eu nunc sit amet</string>
 </resources>
