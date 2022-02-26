@@ -1,12 +1,9 @@
 package com.ameen.qurbatask.ui.component
 
+import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -18,10 +15,12 @@ import androidx.compose.ui.unit.dp
 import com.ameen.qurbatask.R
 import com.ameen.qurbatask.util.TextType
 
+private const val TAG = "ButtonTextWithIcon"
+
 @Composable
-fun ButtonTextWithIcon(text: String, iconResource: Int) {
+fun ButtonTextWithIcon(text: String, iconResource: Int, onClickAction: () -> Unit) {
     TextButton(
-        onClick = { /*TODO*/ },
+        onClick = onClickAction,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Transparent,
             contentColor = Color.Black
@@ -40,6 +39,10 @@ fun ButtonTextWithIcon(text: String, iconResource: Int) {
 
 @Preview(showBackground = true)
 @Composable
-fun ButtonTextWithIconPreview() {
-    ButtonTextWithIcon(text = "43K", iconResource = R.drawable.ic_share)
-}
+fun ButtonTextWithIconPreview() =
+    ButtonTextWithIcon(text = "43K", iconResource = R.drawable.ic_share) {
+        Log.i(
+            TAG,
+            "ButtonTextWithIconPreview: Clicked"
+        )
+    }
