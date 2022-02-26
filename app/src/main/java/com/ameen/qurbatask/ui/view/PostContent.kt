@@ -23,7 +23,7 @@ import com.ameen.qurbatask.util.TextType
 import com.ameen.qurbatask.util.Utils
 
 @Composable
-fun ItemMain(post: PostModel) {
+fun PostContent(post: PostModel) {
 
     Column(Modifier.background(Color.White)) {
 
@@ -31,6 +31,7 @@ fun ItemMain(post: PostModel) {
         Row(
             Modifier
                 .fillMaxWidth()
+                .wrapContentHeight()
                 .padding(
                     start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp
                 ),
@@ -43,10 +44,14 @@ fun ItemMain(post: PostModel) {
                         imageSource = R.drawable.image_content,
                         modifier = Modifier
                             .padding(end = 8.dp)
-                            .size(60.dp)
+                            .size(40.dp)
                     )
 
-                    Column {
+                    Column(
+                        modifier = Modifier.height(40.dp),
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.SpaceBetween
+                    ) {
                         post.itemTitle?.let { TextToView(textToShow = it, TextType.TEXT_TITLE) }
                         TextToView(
                             textToShow = "${post.itemPublishedDay.toString()} days ago",
@@ -59,14 +64,17 @@ fun ItemMain(post: PostModel) {
                             R.drawable.ic_restourant
                         else R.drawable.ic_verified_user,
                         modifier = Modifier
-                            .padding(4.dp)
+                            .padding(start = 16.dp)
                             .size(20.dp)
                     )
                 }
             }
 
             Image(
-                alignment = Alignment.BottomCenter,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(16.dp),
+                alignment = Alignment.CenterEnd,
                 painter = painterResource(id = R.drawable.ic_more),
                 contentDescription = " "
             )
@@ -110,7 +118,7 @@ fun ItemMain(post: PostModel) {
         //Button Interaction Section
         Row(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -129,7 +137,7 @@ fun ItemMain(post: PostModel) {
             )
         }
 
-        Divider(modifier = Modifier.padding(8.dp), thickness = 0.dp)
+        //Divider(modifier = Modifier.padding(8.dp), thickness = 0.dp)
     }
 
 }
@@ -139,5 +147,5 @@ fun ItemMain(post: PostModel) {
 fun ContentPreview() {
     val item = DummyData().getDummyData()[0]
 
-    ItemMain(post = item)
+    PostContent(post = item)
 }

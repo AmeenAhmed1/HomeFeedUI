@@ -14,7 +14,7 @@ import com.ameen.qurbatask.util.TextType
 fun ContentType(titleText: String, typeText: String) {
     Column(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp)
             .fillMaxWidth()
     ) {
         Row {
@@ -22,8 +22,8 @@ fun ContentType(titleText: String, typeText: String) {
                 imageSource = R.drawable.ic_restourant_tag,
                 modifier = Modifier
                     .padding(end = 8.dp)
-                    .width(50.dp)
-                    .height(50.dp)
+                    .width(40.dp)
+                    .height(40.dp)
             )
 
             Column(

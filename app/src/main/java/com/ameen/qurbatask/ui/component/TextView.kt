@@ -14,20 +14,20 @@ import com.ameen.qurbatask.util.TextType
 
 private val TitleTextTheme = TextStyle(
     fontWeight = FontWeight.Bold,
-    fontSize = 20.sp,
+    fontSize = 15.sp,
     fontFamily = FontFamily(Font(R.font.montserrat_bold))
 )
 
 private val NormalTextTheme = TextStyle(
     fontWeight = FontWeight.W600,
-    fontSize = 15.sp,
+    fontSize = 12.sp,
     fontFamily = FontFamily(Font(R.font.montserrat_light))
 )
 
 private val LightTextTheme = TextStyle(
     fontWeight = FontWeight.Light,
     color = Color.Gray,
-    fontSize = 15.sp,
+    fontSize = 12.sp,
     fontFamily = FontFamily(Font(R.font.montserrat_light))
 )
 

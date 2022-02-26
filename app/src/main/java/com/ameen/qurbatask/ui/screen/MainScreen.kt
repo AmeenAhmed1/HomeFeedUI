@@ -1,6 +1,7 @@
 package com.ameen.qurbatask.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -12,7 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ameen.qurbatask.data.PostModel
 import com.ameen.qurbatask.ui.theme.QurbaTaskTheme
-import com.ameen.qurbatask.ui.view.ItemMain
+import com.ameen.qurbatask.ui.view.PostContent
+import com.ameen.qurbatask.ui.view.SearchBar
 
 @Composable
 fun MainScreen(postToDisplay: List<PostModel>) {
@@ -21,13 +23,26 @@ fun MainScreen(postToDisplay: List<PostModel>) {
         Surface(
             modifier = Modifier.fillMaxSize(),
         ) {
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                itemsIndexed(postToDisplay) { index, item ->
-                    ItemMain(post = item)
-                    if (index < postToDisplay.lastIndex) Divider(
-                        color = Color.LightGray,
-                        thickness = 5.dp
-                    )
+
+            Column {
+
+                SearchBar()
+
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+
+                    itemsIndexed(postToDisplay) { index, item ->
+                        Divider(
+                            color = Color.LightGray,
+                            thickness = 5.dp
+                        )
+
+                        PostContent(post = item)
+
+//                        if (index < postToDisplay.lastIndex) Divider(
+//                            color = Color.LightGray,
+//                            thickness = 5.dp
+//                        )
+                    }
                 }
             }
         }
