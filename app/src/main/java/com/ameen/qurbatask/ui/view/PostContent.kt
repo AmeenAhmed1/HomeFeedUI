@@ -126,15 +126,17 @@ fun PostContent(post: PostModel) {
             ButtonTextWithIcon(
                 text = post.itemLikeCount?.toString()!!,
                 iconResource = R.drawable.ic_like
-            )
+            ) {}
+
             ButtonTextWithIcon(
                 text = post.itemCommentCount?.toString()!!,
                 iconResource = R.drawable.ic_comment
-            )
+            ) {}
+
             ButtonTextWithIcon(
                 text = post.itemShareCount?.toString()!!,
                 iconResource = R.drawable.ic_share
-            )
+            ) {}
         }
 
         //Divider(modifier = Modifier.padding(8.dp), thickness = 0.dp)
