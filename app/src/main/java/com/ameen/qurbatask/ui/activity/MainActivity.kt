@@ -3,39 +3,37 @@ package com.ameen.qurbatask.ui.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
-import com.ameen.qurbatask.data.DummyData
 import com.ameen.qurbatask.navigation.SetupNavGraph
-import com.ameen.qurbatask.ui.screen.MainScreen
-import com.ameen.qurbatask.ui.view.TopAppBar
+import com.ameen.qurbatask.repository.PostsRepository
+import com.ameen.qurbatask.viewmodel.PostsViewModel
+import com.ameen.qurbatask.viewmodel.PostsViewModelFactory
 
 private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var viewModel: PostsViewModel
+    private lateinit var repository: PostsRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            initViewModel()
+
             val navController = rememberNavController()
-            SetupNavGraph(navController = navController, applicationContext)
+            SetupNavGraph(navController = navController, viewModel)
             //MainActivityScreen(applicationContext)
         }
     }
-}
 
-//@Composable
-//private fun MainActivityScreen(context: Context) {
-//    Scaffold(topBar = { TopAppBar() }) {
-//        MainScreen(postToDisplay = DummyData().loadDataFromJson(context))
-//    }
-//}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    Scaffold(topBar = { TopAppBar() }) {
-        MainScreen(postToDisplay = DummyData().getDummyData())
+    private fun initViewModel() {
+        repository = PostsRepository(this)
+        viewModel = ViewModelProvider(
+            this,
+            PostsViewModelFactory(repository)
+        ).get(PostsViewModel::class.java)
     }
 }

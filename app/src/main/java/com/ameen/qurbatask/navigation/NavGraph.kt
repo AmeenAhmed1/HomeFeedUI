@@ -1,18 +1,17 @@
 package com.ameen.qurbatask.navigation
 
-import android.content.Context
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.ameen.qurbatask.data.DummyData
 import com.ameen.qurbatask.ui.screen.MainScreen
 import com.ameen.qurbatask.ui.screen.SplashScreen
 import com.ameen.qurbatask.ui.view.TopAppBar
+import com.ameen.qurbatask.viewmodel.PostsViewModel
 
 @Composable
-fun SetupNavGraph(navController: NavHostController, context: Context) {
+fun SetupNavGraph(navController: NavHostController, viewModel: PostsViewModel) {
 
     NavHost(
         navController = navController,
@@ -23,7 +22,7 @@ fun SetupNavGraph(navController: NavHostController, context: Context) {
 
         composable(route = Screen.Main.route) {
             Scaffold(topBar = { TopAppBar() }) {
-                MainScreen(postToDisplay = DummyData().loadDataFromJson(context))
+                MainScreen(viewModel = viewModel)
             }
         }
     }

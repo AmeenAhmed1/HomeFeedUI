@@ -12,14 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ameen.qurbatask.data.DummyData
 import com.ameen.qurbatask.data.PostModel
 import com.ameen.qurbatask.ui.theme.QurbaTaskTheme
 import com.ameen.qurbatask.ui.view.PostContent
 import com.ameen.qurbatask.ui.view.SearchBar
+import com.ameen.qurbatask.viewmodel.PostsViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun MainScreen(postToDisplay: List<PostModel>) {
+fun MainScreen(viewModel: PostsViewModel) {
     // A surface container using the 'background' color from the theme
 
     var isLoading by remember { mutableStateOf(true) }
@@ -39,7 +41,9 @@ fun MainScreen(postToDisplay: List<PostModel>) {
                 }
 
                 if (isLoading) SkeletonLoadingScreen()
-                else ShowPostContent(postToDisplay = postToDisplay)
+                else viewModel.postFromJsonFile.value?.let {
+                    ShowPostContent(postToDisplay = it)
+                }
             }
         }
     }
@@ -58,4 +62,10 @@ private fun ShowPostContent(postToDisplay: List<PostModel>) {
             PostContent(post = item)
         }
     }
+}
+
+@Preview
+@Composable
+fun MainScreenPreview() {
+    ShowPostContent(postToDisplay = DummyData().getDummyData())
 }
